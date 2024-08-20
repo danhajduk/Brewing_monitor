@@ -1,3 +1,4 @@
+
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.const import TEMP_CELSIUS
 from homeassistant.components.sensor import SensorDeviceClass
@@ -28,6 +29,7 @@ class BrewingMonitorSensor(SensorEntity):
         self._attr_device_info = DEVICE_INFO
         self._attr_device_class = device_class
         self._attr_state = None
+        self._current_gravity_entity = entry.data.get("current_gravity_entity")
 
     @property
     def state(self):
@@ -46,7 +48,6 @@ class BrewingMonitorSensor(SensorEntity):
         return None
 
     def update(self):
-        """Update the sensor state."""
-        # This method should fetch the latest data for the specific sensor type.
-        # You would implement the logic to get the current value for each sensor.
-        pass
+        """Update the sensor state."
+        if self._sensor_category == "gravity":
+            self._attr_state = self.hass.states.get(self._current_gravity_entity).state
