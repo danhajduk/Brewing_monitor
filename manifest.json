@@ -1,10 +1,17 @@
+
 {
   "domain": "brewing_monitor",
   "name": "Brewing Monitor",
-  "version": "0.1",
+  "version": "0.0.1",
   "documentation": "https://www.example.com",
-  "requirements": [],
   "dependencies": [],
   "codeowners": ["@danhajduk"],
-  "config_flow": true
+  "requirements": [],
+  "config_flow": true,
+  "iot_class": "local_polling",
+  "integration_type": "device",
+  "homeassistant": ">=2021.12.0",
+  "zeroconf_default_interface": false,
+  "bluetooth_default_interface": false,
+  "discoverable": false
 }
