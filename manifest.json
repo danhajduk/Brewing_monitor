@@ -1,0 +1,10 @@
+{
+    "domain": "brewing_monitor",
+    "name": "Brewing Monitor",
+    "version": "0.0.1",
+    "documentation": "https://www.example.com/my_integration",
+    "requirements": [],
+    "dependencies": [],
+    "codeowners": ["danhajduk"]
+  }
+  
