@@ -1,9 +1,6 @@
-
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
-from homeassistant.helpers import entity_registry
-from homeassistant.const import ENTITY_MATCH_ALL
 from .const import DOMAIN
 
 @callback
@@ -25,7 +22,7 @@ class BrewingMonitorConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if user_input["name"] in configured_instances(self.hass):
                 errors["base"] = "name_exists"
             else:
-                return await self.async_step_select_entity(user_input)
+                return self.async_create_entry(title=user_input["name"], data=user_input)
 
         data_schema = vol.Schema(
             {
@@ -35,22 +32,4 @@ class BrewingMonitorConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return self.async_show_form(
             step_id="user", data_schema=data_schema, errors=errors
-        )
-
-    async def async_step_select_entity(self, user_input=None):
-        """Allow the user to select an entity for Current Gravity."""
-        entity_registry_obj = await entity_registry.async_get_registry(self.hass)
-        entities = [entity.entity_id for entity in entity_registry_obj.entities.values()]
-
-        data_schema = vol.Schema(
-            {
-                vol.Required("current_gravity_entity", default=ENTITY_MATCH_ALL): vol.In(entities)
-            }
-        )
-
-        if user_input is not None:
-            return self.async_create_entry(title=user_input["name"], data=user_input)
-
-        return self.async_show_form(
-            step_id="select_entity", data_schema=data_schema
         )

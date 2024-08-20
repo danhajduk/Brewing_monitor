@@ -1,6 +1,6 @@
 
-from homeassistant.core import HomeAssistant
-from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import HomeAssistant # type: ignore
+from homeassistant.config_entries import ConfigEntry # type: ignore
 from .const import DOMAIN
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
